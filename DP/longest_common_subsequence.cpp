@@ -1,31 +1,53 @@
 
 #include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
+
 using namespace std;
 
-vector<int> ans;
+int n,m;
 
-void subseq(vector<int> arr1,vector<int> arr2,int i,int j){
-    if(i < 0 || j < 0){
-        return;
+int subseq(vector<long long> &arr1,vector<long long> &arr2,int i,int j,
+vector<vector<int>>& dp){
+    if(i == n || j == m){
+        return 0;
     }
+    if (dp[i][j] != -1) return dp[i][j];
     if(arr1[i] == arr2[j]){
-        ans.push_back(arr1[i]);
-        subseq(arr1,arr2,i-1,j-1);
+        return dp[i][j] = 1 + subseq(arr1,arr2,i+1,j+1,dp);
     }else{
-        subseq(arr1,arr2,i-1,j);
-        subseq(arr1,arr2,i,j-1);
+        return dp[i][j] = max(subseq(arr1,arr2,i+1,j,dp),subseq(arr1,arr2,i,j+1,dp));
     }
 }
 
 int main(){
-    int n,m;
+    
     cin >> n >> m;
-    vector<int> arr1(n);
-    vector<int> arr2(m);
-    subseq(arr1,arr2,n-1,m-1);
-    cout << ans.size() << endl;
-    for(int i=0;i<ans.size();i++){
-        cout << ans[i];
+    vector<long long> arr1(n);
+    for(int i=0;i<n;i++) cin >> arr1[i];
+    
+    vector<long long> arr2(m);
+    for(int j=0;j<m;j++) cin >> arr2[j];
+
+    vector<vector<int>> dp(n+1,vector<int>(m+1,-1));
+
+    vector<long long> ans;
+    subseq(arr1,arr2,0,0,dp);
+
+    int i = 0,j=0;
+    while(i < n && j < m){
+        if(arr1[i] == arr2[j]){
+            ans.push_back(arr1[i]);
+            i++,j++;
+        }else if(dp[i+1][j] >= dp[i][j+1] ){
+            i++;
+        }else{
+            j++;
+        }
     }
+
+    cout << ans.size() << endl;
+    for(auto x : ans){
+        cout << x << " ";
+    }
+    cout << endl;
 }
