@@ -1,9 +1,5 @@
 {
     "files.associations": {
-<<<<<<< HEAD
-        "ostream": "cpp"
-    }
-=======
         "array": "cpp",
         "atomic": "cpp",
         "cctype": "cpp",
@@ -47,5 +43,4 @@
         "unordered_set": "cpp"
     },
     "C_Cpp.copilotHover": "disabled"
->>>>>>> 650cd2679ec6ba250531a2da278f9dace9d2b400
 }

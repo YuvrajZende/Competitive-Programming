@@ -1,0 +1,6 @@
+ g++ weird_algorithm.cpp -o weird_algorithm.exe
+
+  .\weird_algorithm.exe 
+
+  g++ weird_algorithm.cpp -o run.exe
+    .\run.exe
